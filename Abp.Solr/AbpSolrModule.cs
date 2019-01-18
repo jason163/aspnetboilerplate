@@ -10,7 +10,9 @@ namespace Abp.Solr
     {
         public override void PreInitialize()
         {
-            IocManager.Register<ISearchProvider, DataCommand>();
+            IocManager.Register<ISolrConfigProvider, SolrConfigProvider>();
+            IocManager.Register<ISearchProvider, SolrSearchProvider>();
+            IocManager.Register<ISearchEngineManager, SearchEngineManager>();
         }
 
         public override void Initialize()

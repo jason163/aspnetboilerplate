@@ -35,13 +35,6 @@ namespace Abp.Solr
             return this.s_ProviderDic;
         }
 
-        public bool TryGetProvider(System.Type dataType, out ISearchProvider provider)
-        {
-            provider = null;
-            string text;
-            return s_ItemDic.TryGetValue(dataType, out text) && !string.IsNullOrWhiteSpace(text) && s_ProviderDic.TryGetValue(text, out provider);
-        }
-
         public SolrConfigProvider()
         {
             s_ProviderDic = new Dictionary<string, ISearchProvider>();
@@ -89,6 +82,7 @@ namespace Abp.Solr
                         foreach (XElement current in enumerable)
                         {
                             LoadSearchProvider(current);
+                            LoadSearcher(current);
                         }
                     }
                 }
@@ -122,12 +116,6 @@ namespace Abp.Solr
             ISearchProvider searchProvider = null;
             string text = providerCfg.Attribute("name").Value.Trim();
             string typeName = providerCfg.Attribute("type").Value.Trim();
-            System.Type type = System.Type.GetType(typeName, true);
-            if (typeof(ISearchProvider).IsAssignableFrom(type))
-            {
-                searchProvider = (ISearchProvider)Activator.CreateInstance(type);
-                searchProvider.ParseConfig(providerCfg);
-            }
             if (searchProvider != null && !s_ProviderDic.ContainsKey(text))
             {
                 s_ProviderDic.Add(text.ToLower(), searchProvider);
@@ -136,18 +124,18 @@ namespace Abp.Solr
 
         private void LoadSearcher(XElement config)
         {
-            SolrSearchProvider.ServiceBaseUrl = config.Element("baseUrl").Value.Trim();
             XElement xElement = config.Element("searchers");
+            XElement urlEle = config.Element("baseUrl");
             if (xElement != null)
             {
                 foreach (XElement current in xElement.Descendants("searcher"))
                 {
                     System.Type type = System.Type.GetType(current.Attribute("result").Value.Trim(), true);
                     System.Type type2 = System.Type.GetType(current.Attribute("type").Value.Trim(), true);
-                    if (!this.s_SearcherDic.ContainsKey(type))
+                    if (!s_SearcherDic.ContainsKey(type))
                     {
-                        object value = System.Activator.CreateInstance(type2);
-                        this.s_SearcherDic.Add(type, value);
+                        object value = System.Activator.CreateInstance(type2,urlEle.Value.Trim());
+                        s_SearcherDic.Add(type, value);
                     }
                 }
             }

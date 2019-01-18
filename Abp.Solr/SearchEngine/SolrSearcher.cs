@@ -259,9 +259,14 @@ namespace Abp.Solr
         protected override void Init()
         {
             base.Init();
+            
+        }
+        public SolrSearcher(string serviceUrl)
+        {
+            this.Init();
             if (!SolrSearcher<Record, Result>.s_SolrNetComponentHasInitialized)
             {
-                string serverURL = Path.Combine(SolrSearchProvider.ServiceBaseUrl, this.SolrCoreName);
+                string serverURL = Path.Combine(serviceUrl, this.SolrCoreName);
                 Startup.Init<Record>(serverURL);
                 SolrSearcher<Record, Result>.s_SolrNetComponentHasInitialized = true;
             }

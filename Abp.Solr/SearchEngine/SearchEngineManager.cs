@@ -6,19 +6,17 @@ namespace Abp.Solr
 {
     public class SearchEngineManager : ISearchEngineManager
     {
-        private ISolrConfigProvider configProvider;
+        private ISearchProvider searchProvider;        
 
-        public SearchEngineManager(ISolrConfigProvider configProvider)
+        public SearchEngineManager(ISearchProvider searchProvider)
         {
-            this.configProvider = configProvider;
+            this.searchProvider = searchProvider;
         }
 
         public T Query<T>(SearchCondition condition)
         {
-            T result;
-            ISearchProvider searchProvider=null;
-            
-            if (this.configProvider.TryGetProvider(typeof(T), out searchProvider) && searchProvider != null)
+            T result;            
+            if (searchProvider != null)
             {
                 result = searchProvider.Query<T>(condition);
             }

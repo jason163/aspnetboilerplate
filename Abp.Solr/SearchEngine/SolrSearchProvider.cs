@@ -14,8 +14,6 @@ namespace Abp.Solr
             this.solrConfigProvider = solrConfig;
         }
 
-        //private Dictionary<Type, object> s_SearcherDic = new Dictionary<Type, object>();
-        private string ServiceBaseUrl;
         public Result Query<Result>(SearchCondition condition)
         {
             System.Type typeFromHandle = typeof(Result);
@@ -31,23 +29,6 @@ namespace Abp.Solr
             }
             return searcher.Query(condition);
         }
-        //public void ParseConfig(XElement config)
-        //{
-        //    //SolrSearchProvider.ServiceBaseUrl = config.Element("baseUrl").Value.Trim();
-        //    XElement xElement = config.Element("searchers");
-        //    if (xElement != null)
-        //    {
-        //        foreach (XElement current in xElement.Descendants("searcher"))
-        //        {
-        //            System.Type type = System.Type.GetType(current.Attribute("result").Value.Trim(), true);
-        //            System.Type type2 = System.Type.GetType(current.Attribute("type").Value.Trim(), true);
-        //            if (!this.solrConfigProvider.GetSearcherDic().ContainsKey(type))
-        //            {
-        //                object value = System.Activator.CreateInstance(type2);
-        //                this.solrConfigProvider.GetSearcherDic().Add(type, value);
-        //            }
-        //        }
-        //    }
-        //}
+        
     }
 }

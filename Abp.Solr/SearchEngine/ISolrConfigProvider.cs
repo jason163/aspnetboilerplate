@@ -12,7 +12,5 @@ namespace Abp.Solr
         Dictionary<Type, string> GetItemDic();
         // 搜索目录对应的 Seacher列表
         Dictionary<Type, object> GetSearcherDic();
-
-        bool TryGetProvider(System.Type dataType, out ISearchProvider provider);
     }
 }
