@@ -1,6 +1,7 @@
-﻿using Abp.IdentityFramework;
+﻿
 using Abp.Web.Mvc.Controllers;
 using Microsoft.AspNet.Identity;
+using System.Web.Mvc;
 
 namespace AbpAspNetMvcDemo.Controllers
 {
@@ -11,9 +12,5 @@ namespace AbpAspNetMvcDemo.Controllers
             LocalizationSourceName = "AbpAspNetMvcDemoModule";
         }
 
-        protected void CheckErrors(IdentityResult identityResult)
-        {
-            identityResult.CheckErrors(LocalizationManager);
-        }
     }
 }

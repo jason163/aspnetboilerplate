@@ -167,6 +167,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Data.SqlClient, Version=4.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Data.SqlClient.4.6.0\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.Diagnostics.DiagnosticSource.4.5.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -307,6 +310,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Channel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -344,6 +348,11 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Configuration\Data\Channel\Channel.config" />
+    <Content Include="Configuration\Data\Channel\ChannelBrand.config" />
+    <Content Include="Configuration\Data\Channel\ChannelProduct.config" />
+    <Content Include="Configuration\Data\Channel\ChannelStock.config" />
+    <Content Include="Configuration\Data\DB.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -392,7 +401,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
@@ -402,13 +410,9 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Abp.FluentValidation\Abp.FluentValidation.csproj">
-      <Project>{8c6595ea-c3cd-47e6-ae98-9e8adfd92e67}</Project>
-      <Name>Abp.FluentValidation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\src\Abp.Web.Common\Abp.Web.Common.csproj">
-      <Project>{883f1591-5b8e-4d5d-85de-ed96069f2a13}</Project>
-      <Name>Abp.Web.Common</Name>
+    <ProjectReference Include="..\..\..\Abp.DataAccess\Abp.DataAccess.csproj">
+      <Project>{89E0A431-C20B-4480-BCB7-2D67D89F787A}</Project>
+      <Name>Abp.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\src\Abp.Web.Mvc\Abp.Web.Mvc.csproj">
       <Project>{D2C8ED70-6ED1-4539-A7F0-D8FE89904530}</Project>
@@ -417,14 +421,6 @@
     <ProjectReference Include="..\..\..\src\Abp.Web\Abp.Web.csproj">
       <Project>{bdb8faf9-a297-46e8-9efa-fc806a670b88}</Project>
       <Name>Abp.Web</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\src\Abp.Zero.Common\Abp.Zero.Common.csproj">
-      <Project>{9cfdfe77-85b0-45c1-81bd-82e5c94963fc}</Project>
-      <Name>Abp.Zero.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\src\Abp.Zero\Abp.Zero.csproj">
-      <Project>{425f546c-f2ff-4147-9dbd-6598b7768d19}</Project>
-      <Name>Abp.Zero</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\src\Abp\Abp.csproj">
       <Project>{486c8629-0e65-47e9-9ba4-8180e682c1f8}</Project>

@@ -26,6 +26,11 @@ namespace Abp.Runtime.Caching.Memory
             return _memoryCache.Get(key);
         }
 
+        public override object Get(string key, Func<string, object> factory)
+        {
+            return base.Get(key, factory);
+        }
+
         public override void Set(string key, object value, TimeSpan? slidingExpireTime = null, TimeSpan? absoluteExpireTime = null)
         {
             if (value == null)

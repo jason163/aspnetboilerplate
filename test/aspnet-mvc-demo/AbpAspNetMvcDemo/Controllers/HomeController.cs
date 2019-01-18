@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using Abp.DataAccess;
+using Abp.Dependency;
+using System.Web.Mvc;
 
 namespace AbpAspNetMvcDemo.Controllers
 {
@@ -6,6 +8,11 @@ namespace AbpAspNetMvcDemo.Controllers
     {
         public ActionResult Index()
         {
+            IDataCommand command = IocManager.Instance.Resolve<IDataCommand>();
+            command = command.CreateCommand("GetAllChannelList");
+            var list = command.ExecuteEntityList<Channel>();
+
+
             return View();
         }
 

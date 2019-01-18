@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Abp.FluentValidation;
+using Abp.DataAccess;
 using Abp.Modules;
 using Abp.Web.Mvc;
 
@@ -13,8 +13,8 @@ namespace AbpAspNetMvcDemo
     /// This is the most top and entrance module that depends on others.
     /// </summary>
     [DependsOn(
-        typeof(AbpWebMvcModule),
-        typeof(AbpFluentValidationModule)
+        typeof(AbpDataAccessModule),
+        typeof(AbpWebMvcModule)
     )]
     public class AbpAspNetMvcDemoModule : AbpModule
     {
